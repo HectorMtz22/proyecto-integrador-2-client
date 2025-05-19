@@ -27,30 +27,45 @@ const chartData = [
 ]
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+  egresados: {
+    label: "Egresados",
     color: "hsl(var(--chart-1))",
   },
-  mobile: {
-    label: "Mobile",
+  titulados: {
+    label: "Titulados",
     color: "hsl(var(--chart-2))",
   },
+  cambios_carrera: {
+    label: "Cambios",
+    color: "hsl(var(--chart-3))",
+  },
+  cambios_6ta_oportunidad: {
+    label: "Cambios",
+    color: "hsl(var(--chart-4))",
+  },
+
 } satisfies ChartConfig
 
-export function Component() {
+export function MyChart({
+  title = "Area Chart - Stacked",
+  description = "Showing total visitors for the last 6 months",
+  data = [],
+  keys = [],
+}) {
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Area Chart - Stacked</CardTitle>
+        <CardTitle>{title}</CardTitle>
         <CardDescription>
-          Showing total visitors for the last 6 months
+          {description}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
           <AreaChart
             accessibilityLayer
-            data={chartData}
+            data={data}
             margin={{
               left: 12,
               right: 12,
@@ -58,36 +73,33 @@ export function Component() {
           >
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="month"
+              dataKey="periodo"
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
             />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent indicator="dot" />}
             />
-            <Area
-              dataKey="mobile"
-              type="natural"
-              fill="var(--color-mobile)"
-              fillOpacity={0.4}
-              stroke="var(--color-mobile)"
-              stackId="a"
-            />
-            <Area
-              dataKey="desktop"
-              type="natural"
-              fill="var(--color-desktop)"
-              fillOpacity={0.4}
-              stroke="var(--color-desktop)"
-              stackId="a"
-            />
+            {
+              keys.map((key) => (
+                <Area
+                  key={key}
+                  type="monotone"
+                  dataKey={key}
+                  strokeWidth={2}
+                  fillOpacity={1}
+                  stroke={chartConfig[key].color}
+                  fill={chartConfig[key].color}
+                />
+              ))
+
+            }
           </AreaChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter>
+      {/* <CardFooter>
         <div className="flex w-full items-start gap-2 text-sm">
           <div className="grid gap-2">
             <div className="flex items-center gap-2 font-medium leading-none">
@@ -98,7 +110,7 @@ export function Component() {
             </div>
           </div>
         </div>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   )
 }
