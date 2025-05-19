@@ -36,11 +36,11 @@ const chartConfig = {
     color: "hsl(var(--chart-2))",
   },
   cambios_carrera: {
-    label: "Cambios",
+    label: "Cambios de carrera",
     color: "hsl(var(--chart-3))",
   },
   cambios_6ta_oportunidad: {
-    label: "Cambios",
+    label: "Cambios por 6tas",
     color: "hsl(var(--chart-4))",
   },
 

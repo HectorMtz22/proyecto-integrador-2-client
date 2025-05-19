@@ -25,25 +25,36 @@ function App() {
   return (
     <main className='flex flex-col w-full h-screen'>
       {/* Header */}
-      <header className='flex items-center justify-between w-full h-16 px-10 text-white bg-green-600'>
+      <header className='flex items-center justify-between w-full h-16 px-10 text-white bg-gray-800'>
         <h1>Dashboard de alumnos</h1>
       </header>
       <div className='flex items-center flex-col w-full h-screen justify-center '>
         {loading && <p className='text-2xl text-gray-500'>Cargando Dashboard...</p>}
         {error && <p className='text-2xl text-red-500'>Error: {error}</p>}
         {data && (
-          <div className='w-full max-w-2xl'>
-            <MyChart 
-              title="Egresados vs Titulados"
-              description="Mostrando el total de egresados y titulados por semestre"
-              data={data}
-              keys={['egresados', 'titulados']}
-            />
+          <div className='w-full flex p-10 gap-10'>
+            <section className='w-full'>
+              <MyChart 
+                title="Egresados vs Titulados"
+                description="Mostrando el total de egresados y titulados por semestre"
+                data={data}
+                keys={['egresados', 'titulados']}
+              />
+            </section>
+            <section className='w-full'>
+              <MyChart 
+                title="Cambios de Carrera"
+                description="Mostrando la cantidad de personas que cambiaron de carrera normal y por 6tas"
+                data={data}
+                keys={['cambios_carrera', 'cambios_6ta_oportunidad']}
+              />
+            </section>
+            
           </div>
         )}
         {!loading && !error && !data && (
           <div className='flex flex-col items-center justify-center w-full h-full'>
-            <h2 className='text-2xl text-gray-500'>No hay datos disponibles</h2>
+            <h2 className='text-2xl text-gray-500'>Datos de alumnos de la carrera ITS</h2>
             <p className='text-gray-500'>Por favor, selecciona un semestre</p>
             <select
               className='mt-4 p-2 border border-gray-300 rounded'
