@@ -1,12 +1,14 @@
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
+import { Component } from '@/components/MyChart'
 import './App.css'
 
 function App() {
   return (
     <>
-      <div className="flex flex-col items-center justify-center min-h-svh">
-        <Button>Click me</Button>
+      <div className='flex items-center flex-col w-full h-screen justify-center'>
+        <h1>Dashboard</h1>
+        <div className='w-full max-w-2xl'>
+          <Component />
+        </div>
       </div>
     </>
   )
