@@ -28,28 +28,49 @@ function App() {
       <header className='flex items-center justify-between w-full h-16 px-10 text-white bg-gray-800'>
         <h1>Dashboard de alumnos</h1>
       </header>
-      <div className='flex items-center flex-col w-full h-screen justify-center '>
+      <div className='p-20 pt-0'>
         {loading && <p className='text-2xl text-gray-500'>Cargando Dashboard...</p>}
         {error && <p className='text-2xl text-red-500'>Error: {error}</p>}
         {data && (
+          <div className='flex flex-col items-center justify-center w-full h-full'>
           <div className='w-full flex p-10 gap-10'>
             <section className='w-full'>
               <MyChart 
-                title="Egresados vs Titulados"
-                description="Mostrando el total de egresados y titulados por semestre"
+                title="Egresados"
+                description="Mostrando el total de egresados por semestre"
                 data={data}
-                keys={['egresados', 'titulados']}
+                keys={['egresados']}
               />
             </section>
             <section className='w-full'>
               <MyChart 
-                title="Cambios de Carrera"
-                description="Mostrando la cantidad de personas que cambiaron de carrera normal y por 6tas"
+                title="Titulados"
+                description="Mostrando el total de titulados por semestre"
                 data={data}
-                keys={['cambios_carrera', 'cambios_6ta_oportunidad']}
+                keys={['titulados']}
               />
             </section>
             
+          </div>
+          <div className='w-full flex p-10 gap-10'>
+            <section className='w-full'>
+              <MyChart 
+                title="Cambios de Carrera"
+                description="Mostrando la cantidad de personas que cambiaron de carrera"
+                data={data}
+                keys={['cambios_carrera']}
+              />
+            </section>
+            <section className='w-full'>
+              <MyChart 
+                title="Cambios de Carrera por 6ta oportunidad"
+                description="Mostrando la cantidad de personas que cambiaron de carrera por 6tas"
+                data={data}
+                keys={['cambios_6ta_oportunidad']}
+              />
+            </section>
+            
+          </div>
           </div>
         )}
         {!loading && !error && !data && (
